@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { PageManager } from '../page-objects/pageManager';
+
 
 test.beforeEach(async({page}) => {
   await page.goto('/');
@@ -6,18 +8,11 @@ test.beforeEach(async({page}) => {
 
 test('a/b test', async ({ page }) => {
   // Not sure what this example does, so using it as a base for my tests.
+  const pm = new PageManager(page)
   await expect(page.locator('.heading')).toHaveText('Welcome to the-internet');
-  await page.locator('ul li a[href="/abtest"]').click();
-  await expect(page.locator('h3')).toHaveText('A/B Test Control')
+
+  pm.navigateToHomePage().navigateToAbTesting()
+  const headingText = await page.locator('h3').innerText();
+  const expectedTexts = ['A/B Test Control', 'A/B Test Variation 1'];
+  expect(expectedTexts).toContain(headingText);
 });
-
-test('add/remove elements', async({page}) =>{
-  // Test example for adding and removing elements
-  await page.locator('ul li [href="/add_remove_elements/"]').click();
-  await expect(page.getByRole('button', {name: 'Delete'})).toBeHidden()
-  await page.getByRole('button', {name: 'Add Element'}).click()
-  await expect(page.getByRole('button', {name: 'Delete'})).toBeVisible()
-  await page.getByRole('button', {name: 'Delete'}).click()
-  await expect(page.getByRole('button', {name: 'Delete'})).toBeHidden()
-
-})

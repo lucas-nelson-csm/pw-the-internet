@@ -1,17 +1,23 @@
-import{ Locator, Page, expect } from "@playwright/test";
-import { HomePage } from "./homePage";
+import { Page } from '@playwright/test';
+import { HomePage } from './homePage';
+import { AddRemoveElementsPage } from './addRemoveElementsPage';
 
-export class PageManager{
+export class PageManager {
+    private readonly page: Page;
+    private readonly homePage: HomePage;
+    private readonly addRemoveElementsPage: AddRemoveElementsPage;
 
-    private readonly page: Page
-    private readonly homePage: HomePage
-
-    constructor(page: Page){
-        this.page = page
-        this.homePage = new HomePage(this.page)
+    constructor(page: Page) {
+        this.page = page;
+        this.homePage = new HomePage(this.page);
+        this.addRemoveElementsPage = new AddRemoveElementsPage(this.page);
     }
 
-    navigateTo(){
-        return this.homePage
+    navigateToHomePage() {
+        return this.homePage;
+    }
+
+    navigateToAddRemoveElementsPage() {
+        return this.addRemoveElementsPage;
     }
 }

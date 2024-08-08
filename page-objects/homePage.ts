@@ -1,24 +1,25 @@
-import{ Locator, Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { HelperBase } from "./helperBase";
 
+export class HomePage extends HelperBase {
+    private readonly abTestingLocator: Locator;
+    private readonly addRemoveElementLocator: Locator;
 
-export class HomePage extends HelperBase{
-    readonly abTestingExampleLocator: Locator
-
-
-    constructor(page: Page){
-        super(page)
-        this.abTestingExampleLocator = page.locator('ul li a[href="/abtest"]')
-
-    }
-    async abTestingExample(){
-        await this.selectGroupMenuItem('ul li a[href="/abtest"]')
-        await this.abTestingExampleLocator.click();
-        await this.waitForNumberOfSeconds(2)
+    constructor(page: Page) {
+        super(page);
+        this.abTestingLocator = page.locator('ul li a[href="/abtest"]');
+        this.addRemoveElementLocator = page.locator('ul li [href="/add_remove_elements/"]');
     }
 
-    private async selectGroupMenuItem(groupItemTitle: string){
-        const groupMenuItem = this.page.locator(groupItemTitle)
-        await groupMenuItem.click()
-}
+    async navigateToAbTesting() {
+        await this.navigateTo(this.abTestingLocator);
+    }
+
+    async navigateToAddRemoveElements() {
+        await this.navigateTo(this.addRemoveElementLocator);
+    }
+
+    private async navigateTo(locator: Locator) {
+        await locator.click();
+    }
 }
