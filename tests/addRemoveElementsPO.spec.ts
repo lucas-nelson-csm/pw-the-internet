@@ -9,7 +9,7 @@ test('initial state of elements', async ({ page }) => {
     const pm = new PageManager(page);
     const addRemovePage = pm.navigateToAddRemoveElementsPage();
 
-    await pm.navigateToHomePage().navigateToAddRemoveElements()
+    await pm.navigateTo().addRemoveElements()
     await addRemovePage.waitForDeleteElementHidden();
 });
 
@@ -17,7 +17,7 @@ test('add/remove 1 element', async ({ page }) => {
     const pm = new PageManager(page);
     const addRemovePage = pm.navigateToAddRemoveElementsPage();
 
-    await pm.navigateToHomePage().navigateToAddRemoveElements();
+    await pm.navigateTo().addRemoveElements();
 
     // Ensure no delete buttons are visible initially
     await addRemovePage.waitForDeleteElementHidden();
@@ -35,7 +35,7 @@ test('add multiple elements and verify count', async ({ page }) => {
     const addRemovePage = pm.navigateToAddRemoveElementsPage();
     const randomNumber = 5;
 
-    await pm.navigateToHomePage().navigateToAddRemoveElements()
+    await pm.navigateTo().addRemoveElements()
 
     for (let i = 0; i < randomNumber; i++) {
         await addRemovePage.clickAddElement();
@@ -50,7 +50,7 @@ test('add/remove multiple elements', async ({ page }) => {
     const addRemovePage = pm.navigateToAddRemoveElementsPage();
     const randomNumber = Math.floor(Math.random() * 10) + 1;
 
-    await pm.navigateToHomePage().navigateToAddRemoveElements();
+    await pm.navigateTo().addRemoveElements();
 
     for (let i = 1; i <= randomNumber; i++) {
         await addRemovePage.clickAddElement();

@@ -11,7 +11,7 @@ test('a/b test', async ({ page }) => {
   const pm = new PageManager(page)
   await expect(page.locator('.heading')).toHaveText('Welcome to the-internet');
 
-  pm.navigateToHomePage().navigateToAbTesting()
+  pm.navigateTo().abTesting()
   const headingText = await page.locator('h3').innerText();
   const expectedTexts = ['A/B Test Control', 'A/B Test Variation 1'];
   expect(expectedTexts).toContain(headingText);

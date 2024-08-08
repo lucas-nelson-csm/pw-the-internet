@@ -13,7 +13,7 @@ export class PageManager {
         this.addRemoveElementsPage = new AddRemoveElementsPage(this.page);
     }
 
-    navigateToHomePage() {
+    navigateTo() {
         return this.homePage;
     }
 
