@@ -1,11 +1,14 @@
 import {test, expect} from '@playwright/test'
 import { PageManager } from '../page-objects/pageManager'
+import dotenv from 'dotenv';
+
+dotenv.config(); 
 
 test.use({
     // Set up the HTTP credentials
     httpCredentials: {
-        username: '',
-        password: '',
+        username: process.env.NOUSERNAME || '',
+        password: process.env.NOPASSWORD || '',
     }
 });
 
